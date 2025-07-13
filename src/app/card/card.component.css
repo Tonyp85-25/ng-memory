@@ -1,0 +1,11 @@
+div{
+  width: 100px;
+  height: 100px;
+  background-color: #aaa;
+  margin-right: 10px;
+  border: none;
+}
+
+div:hover {
+  background-color: #656262;
+}
