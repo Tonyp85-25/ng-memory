@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CardComponent } from '../card/card.component';
+import { fruits } from '../models/fruits';
+import { CardsService } from '../cards.service';
+import { CardModel } from '../models/card.model';
 
 @Component({
   selector: 'app-board',
@@ -8,5 +11,12 @@ import { CardComponent } from '../card/card.component';
   styleUrl: './board.component.css'
 })
 export class BoardComponent {
-   cards =[{fruit:"apple"},{fruit:"orange"},{fruit:"raspberry"}];
+   cardsService = inject(CardsService);
+    cards:CardModel[];
+   constructor() {
+    this.cards =this.cardsService.getCards();
+   }
+  
+
+  
 }

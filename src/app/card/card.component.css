@@ -1,4 +1,4 @@
-div{
+button{
   width: 100px;
   height: 100px;
   background-color: #aaa;
@@ -6,6 +6,11 @@ div{
   border: none;
 }
 
-div:hover {
+button:hover {
   background-color: #656262;
+}
+
+.image {
+  background-color: white;
+  background-image: url("../../../public/cards.png");
 }
