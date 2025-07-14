@@ -1,5 +1,13 @@
-import { Component, inject, Input, input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  input,
+  Output,
+} from '@angular/core';
 import { CardsService } from '../cards.service';
+import { CardModel } from '../models/card.model';
 
 @Component({
   selector: 'app-card',
@@ -7,23 +15,21 @@ import { CardsService } from '../cards.service';
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
   host: {
-   '(click)': 'onClick($event)'
-  }
-
+    '(click)': 'onClick($event)',
+  },
 })
 export class CardComponent {
-  
-  @Input({required: true}) data! :{fruit:string}
+  @Input({ required: true }) data!: CardModel;
+
+  @Output() onPlayed = new EventEmitter<CardModel>();
   cardsService = inject(CardsService);
   isPlayed = false;
 
-  fruitPosition ="" ;
+  fruitPosition = '';
 
   onClick(event: MouseEvent) {
-    console.log(event);
-    event.stopPropagation();
-    this.isPlayed = !this.isPlayed
-    this.fruitPosition=this.cardsService.getPosition(this.data.fruit)
+    this.fruitPosition = this.cardsService.getPosition(this.data.fruit);
+    this.onPlayed.emit(this.data);
+    this.isPlayed = !this.isPlayed;
   }
-
 }
