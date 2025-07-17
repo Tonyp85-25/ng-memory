@@ -1,1 +1,1 @@
-<button type="button" [class.image]="isPlayed" [style.backgroundPosition]="fruitPosition"></button>
+<button type="button" [class.image]="isPlayed" [style.backgroundPosition]="fruitPosition" [disabled]="data.isDisabled" (click)="onClick($event)"></button>

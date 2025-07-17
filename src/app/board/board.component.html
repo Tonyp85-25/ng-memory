@@ -1,6 +1,6 @@
 <ul>
-@for (card of cards; track $index) {
-    <app-card [data]="card" ></app-card>
+@for (card of cards$|async; track $index) {
+    <app-card [data]="card" (onPlay)="onPlayCard($event)" ></app-card>
 }
 
 </ul>

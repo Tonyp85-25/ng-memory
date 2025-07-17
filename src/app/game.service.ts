@@ -5,9 +5,13 @@ import { CardModel } from './models/card.model';
   providedIn: 'root',
 })
 export class GameService {
-  playedCards: CardModel[] = [];
+  private playedCards: CardModel[] = [];
 
   constructor() {}
+
+  get cards() {
+    return this.playedCards;
+  }
 
   addPlayedCard(card: CardModel) {
     if (this.playedCards.length < 2) {

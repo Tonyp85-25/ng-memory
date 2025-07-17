@@ -1,5 +1,6 @@
-import { Fruit } from "./fruits"
+import { Fruit } from './fruits';
 
-export type CardModel= {
-    fruit: Fruit
-}
+export type CardModel = {
+  fruit: Fruit;
+  isDisabled: boolean;
+};
