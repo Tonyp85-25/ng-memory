@@ -11,11 +11,15 @@ export class GameService {
   private cardsService = inject(CardsService);
   cards$ = this.cardsService.cardsStack$;
   private message = '';
+  private score = 0;
 
   constructor() {}
 
   getMessage() {
     return this.message;
+  }
+  getScore() {
+    return this.score;
   }
 
   get cards() {
@@ -52,6 +56,7 @@ export class GameService {
         const result = this.checkCards();
 
         if (result) {
+          this.score += 1;
           newCards = oldCards.map((card) => ({
             ...card,
             isFound: card.id === id ? true : card.isFound,
