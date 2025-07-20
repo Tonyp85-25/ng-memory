@@ -14,7 +14,12 @@ export class CardsService {
   private readonly SPRITE_SPACE = 100;
 
   constructor() {
-    this.cards = fruits.map((fruit) => ({ fruit, isDisabled: false }));
+    this.cards = fruits.map((fruit) => ({
+      id: '',
+      fruit,
+      isDisabled: false,
+      isFound: false,
+    }));
     this.prepareCards();
     this.shuffle();
     this.cardsStack$.next(this.cardsStack);
@@ -22,10 +27,18 @@ export class CardsService {
 
   private prepareCards() {
     const slicedCards = this.cards.slice(0, 14);
-    this.cardsStack = slicedCards.concat(slicedCards);
+    this.cardsStack = slicedCards.concat(slicedCards).map((card, index) => ({
+      ...card,
+      id: `${card.fruit}-${index}`,
+    }));
   }
-  updateCards() {}
+  updateCards(cards: CardModel[]) {
+    this.cardsStack = cards;
+    this.cardsStack$.next(this.cardsStack);
+  }
   disableCards() {
+    console.log('disabled');
+
     this.cardsStack = this.cardsStack.map((card) => ({
       ...card,
       isDisabled: true,

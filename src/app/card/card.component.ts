@@ -1,30 +1,27 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CardsService } from '../cards.service';
 import { CardModel } from '../models/card.model';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-card',
   imports: [],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
-  host: {
-    '(click)': 'onClick($event)',
-  },
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
   @Input({ required: true }) data!: CardModel;
 
-  @Output() onPlay = new EventEmitter<CardModel>();
   cardsService = inject(CardsService);
-  isPlayed = false;
+  gameService = inject(GameService);
 
   fruitPosition = '';
 
-  onClick(event: MouseEvent) {
-    event.stopPropagation();
-
+  ngOnInit() {
     this.fruitPosition = this.cardsService.getPosition(this.data.fruit);
-    this.isPlayed = true;
-    this.onPlay.emit(this.data);
+  }
+
+  onClick() {
+    this.gameService.turnCard(this.data.id, this.data.fruit);
   }
 }
