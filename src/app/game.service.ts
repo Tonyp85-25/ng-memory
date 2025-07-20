@@ -10,8 +10,13 @@ export class GameService {
   private playedCards: { id: string; fruit: Fruit }[] = [];
   private cardsService = inject(CardsService);
   cards$ = this.cardsService.cardsStack$;
+  private message = '';
 
   constructor() {}
+
+  getMessage() {
+    return this.message;
+  }
 
   get cards() {
     return this.playedCards;
@@ -78,5 +83,10 @@ export class GameService {
       }));
       this.cardsService.updateCards(newCards);
     }
+  }
+
+  stopGame() {
+    this.cardsService.disableCards();
+    this.message = 'Game Over';
   }
 }

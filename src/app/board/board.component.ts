@@ -3,6 +3,8 @@ import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../card/card.component';
 import { CardsService } from '../cards.service';
 
+import { GameService } from '../game.service';
+
 @Component({
   selector: 'app-board',
   imports: [CardComponent, AsyncPipe],
@@ -11,6 +13,7 @@ import { CardsService } from '../cards.service';
 })
 export class BoardComponent {
   cardsService = inject(CardsService);
+  gameService = inject(GameService);
 
   cards$ = this.cardsService.cardsStack$;
 }
